@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>File Structure Guide | Stiv Tech Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0a0a0f;--surface:#111118;--card:#16161f;--accent:#00ff88;--accent2:#0af;--accent3:#ff6b35;--text:#e8e8f0;--muted:#6b6b88;--border:rgba(0,255,136,0.15);}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;padding:3rem 2rem;max-width:960px;margin:0 auto;line-height:1.7;}
+    h1{font-size:2.5rem;font-weight:800;margin-bottom:.5rem;}
+    h1 span{-webkit-text-stroke:1.5px var(--accent);color:transparent;}
+    .sub{font-family:'Space Mono',monospace;font-size:.8rem;color:var(--muted);margin-bottom:3rem;letter-spacing:.05em;}
+
+    /* Tree */
+    .tree-wrap{background:var(--card);border:1px solid var(--border);padding:2rem;margin-bottom:3rem;overflow-x:auto;position:relative;}
+    .tree-wrap::before{content:'// FILE STRUCTURE';font-family:'Space Mono',monospace;font-size:.65rem;color:var(--accent2);letter-spacing:.15em;display:block;margin-bottom:1.2rem;}
+    .tree{font-family:'Space Mono',monospace;font-size:.85rem;line-height:2;}
+    .tree .folder{color:var(--accent);font-weight:700;}
+    .tree .file-html{color:#f9826c;}
+    .tree .file-css {color:#79b8ff;}
+    .tree .file-js  {color:#f8e3a1;}
+    .tree .file-img {color:#b392f0;}
+    .tree .comment  {color:var(--muted);font-size:.75rem;}
+    .tree .indent1{padding-left:1.5rem;}
+    .tree .indent2{padding-left:3rem;}
+    .tree .indent3{padding-left:4.5rem;}
+
+    /* Sections */
+    h2{font-size:1.5rem;font-weight:800;margin:3rem 0 1.5rem;display:flex;align-items:center;gap:.75rem;}
+    h2::before{content:'';display:inline-block;width:1.5rem;height:2px;background:var(--accent);}
+
+    /* File cards grid */
+    .files-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:3rem;}
+    .file-card{background:var(--card);border:1px solid var(--border);padding:1.5rem;position:relative;overflow:hidden;transition:all .3s;}
+    .file-card:hover{border-color:rgba(0,255,136,.4);transform:translateY(-3px);}
+    .file-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+    .file-card.html::before{background:#f9826c;}
+    .file-card.css::before{background:#79b8ff;}
+    .file-card.js::before{background:#f8e3a1;}
+    .file-card.img::before{background:#b392f0;}
+    .fc-type{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem;}
+    .file-card.html .fc-type{color:#f9826c;}
+    .file-card.css  .fc-type{color:#79b8ff;}
+    .file-card.js   .fc-type{color:#f8e3a1;}
+    .file-card.img  .fc-type{color:#b392f0;}
+    .fc-name{font-size:1.1rem;font-weight:700;margin-bottom:.5rem;}
+    .fc-path{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--muted);margin-bottom:1rem;background:rgba(255,255,255,.04);padding:.3rem .6rem;display:inline-block;}
+    .fc-role{font-size:.85rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;}
+    .fc-details{border-top:1px solid var(--border);padding-top:1rem;margin-top:1rem;}
+    .fc-details li{font-size:.8rem;color:var(--muted);margin-left:1.2rem;margin-bottom:.3rem;}
+    .fc-details li span{color:var(--text);}
+
+    /* How they link */
+    .link-diagram{background:var(--card);border:1px solid var(--border);padding:2rem;margin-bottom:3rem;}
+    .ld-row{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;flex-wrap:wrap;}
+    .ld-box{font-family:'Space Mono',monospace;font-size:.75rem;padding:.5rem 1rem;border:1px solid;white-space:nowrap;}
+    .ld-box.html{color:#f9826c;border-color:#f9826c;background:rgba(249,130,108,.08);}
+    .ld-box.css {color:#79b8ff;border-color:#79b8ff;background:rgba(121,184,255,.08);}
+    .ld-box.js  {color:#f8e3a1;border-color:#f8e3a1;background:rgba(248,227,161,.08);}
+    .ld-box.img {color:#b392f0;border-color:#b392f0;background:rgba(179,146,240,.08);}
+    .ld-arrow{color:var(--accent);font-family:'Space Mono',monospace;font-size:.85rem;}
+    .ld-note{font-size:.8rem;color:var(--muted);}
+
+    /* Code snippets */
+    .code-block{background:#0d1117;border:1px solid var(--border);padding:1.5rem;font-family:'Space Mono',monospace;font-size:.78rem;line-height:1.8;overflow-x:auto;margin:1rem 0 2rem;position:relative;}
+    .code-block .tag{color:#f9826c;}
+    .code-block .attr{color:#b392f0;}
+    .code-block .val{color:#9ecbff;}
+    .code-block .comment{color:var(--muted);}
+    .code-block .fn{color:#b392f0;}
+    .code-block .str{color:#9ecbff;}
+    .code-block .kw{color:#f97583;}
+    .code-block .prop{color:#79b8ff;}
+    .code-block .num{color:#f8e3a1;}
+    .cb-label{position:absolute;top:.5rem;right:.75rem;font-size:.65rem;color:var(--muted);letter-spacing:.1em;}
+
+    /* Concept pill */
+    .concept{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.2);padding:.3rem .8rem;font-family:'Space Mono',monospace;font-size:.72rem;color:var(--accent);margin:.25rem;}
+
+    @media(max-width:600px){body{padding:2rem 1rem;} .files-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+
+  <h1>File <span>Structure</span> Guide</h1>
+  <div class="sub">// stiv-tech-solutions/ — project anatomy explained</div>
+
+  <!-- TREE -->
+  <div class="tree-wrap">
+    <div class="tree">
+<span class="folder">stiv-tech-solutions/</span>          <span class="comment">← root project folder</span>
+<span class="indent1 file-html">├── index.html</span>        <span class="comment">← HOME page</span>
+<span class="indent1 file-html">├── about.html</span>        <span class="comment">← ABOUT page</span>
+<span class="indent1 file-html">├── contact.html</span>      <span class="comment">← CONTACT page</span>
+<span class="indent1 file-html">├── file-structure.html</span><span class="comment">← this guide</span>
+│
+<span class="indent1 folder">├── css/</span>               <span class="comment">← all styling lives here</span>
+<span class="indent2 file-css">└── style.css</span>         <span class="comment">← one master stylesheet (600+ lines)</span>
+│
+<span class="indent1 folder">├── js/</span>                <span class="comment">← all interactivity lives here</span>
+<span class="indent2 file-js">└── main.js</span>           <span class="comment">← one master script (nav, scroll, form)</span>
+│
+<span class="indent1 folder">└── images/</span>            <span class="comment">← all photos live here</span>
+<span class="indent2 file-img">├── photo1.jpg</span>        <span class="comment">← portrait (dreads photo)</span>
+<span class="indent2 file-img">└── photo2.jpg</span>        <span class="comment">← waterfall adventure photo</span>
+    </div>
+  </div>
+
+  <!-- FILE CARDS -->
+  <h2>The Files Explained</h2>
+  <div class="files-grid">
+
+    <!-- index.html -->
+    <div class="file-card html">
+      <div class="fc-type">HTML</div>
+      <div class="fc-name">index.html</div>
+      <div class="fc-path">stiv-tech-solutions/index.html</div>
+      <div class="fc-role">The <strong>Home page</strong>. This is the first file a browser loads. It defines the page <em>structure and content</em> using HTML tags.</div>
+      <div class="fc-details">
+        <ul>
+          <li><span>&lt;nav&gt;</span> — navigation bar</li>
+          <li><span>&lt;section class="hero"&gt;</span> — hero banner with photo</li>
+          <li><span>&lt;div class="tech-ticker"&gt;</span> — scrolling skills ticker</li>
+          <li><span>&lt;section class="skills-section"&gt;</span> — tech stack cards</li>
+          <li><span>&lt;section id="projects"&gt;</span> — live project previews</li>
+          <li><span>&lt;div class="stats-bar"&gt;</span> — stat numbers</li>
+          <li><span>&lt;footer&gt;</span> — site footer</li>
+          <li>Links to <span>css/style.css</span> &amp; <span>js/main.js</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- about.html -->
+    <div class="file-card html">
+      <div class="fc-type">HTML</div>
+      <div class="fc-name">about.html</div>
+      <div class="fc-path">stiv-tech-solutions/about.html</div>
+      <div class="fc-role">The <strong>About page</strong>. Contains your story, photos, tech stack, timeline, and values — same HTML structure as index but different content.</div>
+      <div class="fc-details">
+        <ul>
+          <li><span>.about-dual-photos</span> — both your photos displayed</li>
+          <li><span>.about-meta</span> — name, role, location info</li>
+          <li><span>.tech-badges</span> — hoverable skill badges</li>
+          <li><span>.timeline</span> — career journey items</li>
+          <li><span>.values-grid</span> — four value cards</li>
+          <li><span>.about-cta</span> — call-to-action block</li>
+          <li>Links to same <span>css/style.css</span> &amp; <span>js/main.js</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- contact.html -->
+    <div class="file-card html">
+      <div class="fc-type">HTML</div>
+      <div class="fc-name">contact.html</div>
+      <div class="fc-path">stiv-tech-solutions/contact.html</div>
+      <div class="fc-role">The <strong>Contact page</strong>. Contains your contact details and a working message form. Calls <code>handleSubmit()</code> from main.js on submit.</div>
+      <div class="fc-details">
+        <ul>
+          <li><span>.contact-info</span> — email, phone, location</li>
+          <li><span>.availability</span> — pulsing green status</li>
+          <li><span>#contactForm</span> — the message form</li>
+          <li><span>#formSuccess</span> — success state (hidden until submit)</li>
+          <li><span>onsubmit="handleSubmit(event)"</span> — calls JS function</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- style.css -->
+    <div class="file-card css">
+      <div class="fc-type">CSS</div>
+      <div class="fc-name">style.css</div>
+      <div class="fc-path">stiv-tech-solutions/css/style.css</div>
+      <div class="fc-role">The <strong>master stylesheet</strong>. Controls ALL visual design — colors, fonts, layout, animations, hover effects, and responsive rules for every HTML element across all pages.</div>
+      <div class="fc-details">
+        <ul>
+          <li><span>:root { }</span> — design tokens (colors, sizes)</li>
+          <li><span>nav { }</span> — navigation styles</li>
+          <li><span>.hero { }</span> — hero section layout (CSS Grid)</li>
+          <li><span>@keyframes</span> — ticker, pulse, fillBar animations</li>
+          <li><span>@media (max-width:900px)</span> — mobile responsive rules</li>
+          <li><span>.reveal</span> — scroll animation base class</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- main.js -->
+    <div class="file-card js">
+      <div class="fc-type">JavaScript</div>
+      <div class="fc-name">main.js</div>
+      <div class="fc-path">stiv-tech-solutions/js/main.js</div>
+      <div class="fc-role">The <strong>master script</strong>. Adds all interactivity — hamburger menu, scroll effects, reveal animations, cursor dot, smooth scrolling, and form submission.</div>
+      <div class="fc-details">
+        <ul>
+          <li><span>DOMContentLoaded</span> — waits for page to load</li>
+          <li><span>hamburger.addEventListener</span> — toggles mobile menu</li>
+          <li><span>IntersectionObserver</span> — triggers scroll animations</li>
+          <li><span>navbar.classList.toggle('scrolled')</span> — shrinks nav</li>
+          <li><span>mousemove</span> — moves cursor dot</li>
+          <li><span>handleSubmit()</span> — processes contact form</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- images/ -->
+    <div class="file-card img">
+      <div class="fc-type">Images</div>
+      <div class="fc-name">images/</div>
+      <div class="fc-path">stiv-tech-solutions/images/</div>
+      <div class="fc-role">The <strong>images folder</strong>. Stores all photo assets used by the HTML pages. Referenced using relative paths like <code>src="images/photo1.jpg"</code>.</div>
+      <div class="fc-details">
+        <ul>
+          <li><span>photo1.jpg</span> — portrait photo (hero + about)</li>
+          <li><span>photo2.jpg</span> — waterfall adventure photo (about)</li>
+          <li>Add more images here as your portfolio grows</li>
+          <li>Use descriptive names: <span>project-school.jpg</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- /files-grid -->
+
+  <!-- HOW THEY LINK TOGETHER -->
+  <h2>How the Files Link Together</h2>
+  <div class="link-diagram">
+
+    <div class="ld-row">
+      <div class="ld-box html">index.html</div>
+      <span class="ld-arrow">──→</span>
+      <div class="ld-box css">css/style.css</div>
+      <span class="ld-note">via &lt;link rel="stylesheet" href="css/style.css"&gt;</span>
+    </div>
+
+    <div class="ld-row">
+      <div class="ld-box html">index.html</div>
+      <span class="ld-arrow">──→</span>
+      <div class="ld-box js">js/main.js</div>
+      <span class="ld-note">via &lt;script src="js/main.js"&gt;&lt;/script&gt;</span>
+    </div>
+
+    <div class="ld-row">
+      <div class="ld-box html">index.html</div>
+      <span class="ld-arrow">──→</span>
+      <div class="ld-box img">images/photo1.jpg</div>
+      <span class="ld-note">via &lt;img src="images/photo1.jpg"&gt;</span>
+    </div>
+
+    <div class="ld-row">
+      <div class="ld-box html">about.html</div>
+      <span class="ld-arrow">──→</span>
+      <div class="ld-box css">css/style.css</div>
+      <span class="ld-note">same stylesheet — all pages share one CSS file</span>
+    </div>
+
+    <div class="ld-row">
+      <div class="ld-box html">contact.html</div>
+      <span class="ld-arrow">──→</span>
+      <div class="ld-box js">js/main.js</div>
+      <span class="ld-note">handleSubmit() lives in main.js, called from HTML</span>
+    </div>
+
+    <div class="ld-row">
+      <div class="ld-box html">index.html</div>
+      <span class="ld-arrow">──→</span>
+      <div class="ld-box html">about.html</div>
+      <span class="ld-note">via &lt;a href="about.html"&gt; in nav</span>
+    </div>
+
+  </div>
+
+  <!-- HTML EXPLAINED -->
+  <h2>HTML — Structure</h2>
+  <p style="color:var(--muted);font-size:.9rem;margin-bottom:1rem;">HTML is the <strong style="color:var(--text)">skeleton</strong> of every page. It defines what content exists and where it goes, using <em style="color:var(--accent)">tags</em> as building blocks.</p>
+
+  <div class="code-block">
+    <span class="cb-label">index.html — head section</span>
+<span class="tag">&lt;!DOCTYPE html&gt;</span>   <span class="comment">← tells browser: "this is HTML5"</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>   <span class="comment">← root element, lang for accessibility</span>
+  <span class="tag">&lt;head&gt;</span>            <span class="comment">← invisible metadata</span>
+    <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">/&gt;</span>          <span class="comment">← character encoding</span>
+    <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val">"viewport"</span> <span class="attr">content</span>=<span class="val">"width=device-width"</span><span class="tag">/&gt;</span>  <span class="comment">← responsive</span>
+    <span class="tag">&lt;title&gt;</span>Stiv Tech Solutions<span class="tag">&lt;/title&gt;</span>   <span class="comment">← browser tab text</span>
+    <span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="val">"stylesheet"</span> <span class="attr">href</span>=<span class="val">"css/style.css"</span><span class="tag">&gt;</span>  <span class="comment">← loads CSS</span>
+  <span class="tag">&lt;/head&gt;</span>
+  <span class="tag">&lt;body&gt;</span>            <span class="comment">← everything visible goes here</span>
+    <span class="tag">&lt;nav&gt;</span>...<span class="tag">&lt;/nav&gt;</span>
+    <span class="tag">&lt;section&gt;</span>...<span class="tag">&lt;/section&gt;</span>
+    <span class="tag">&lt;footer&gt;</span>...<span class="tag">&lt;/footer&gt;</span>
+    <span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"js/main.js"</span><span class="tag">&gt;&lt;/script&gt;</span>  <span class="comment">← loads JS last</span>
+  <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem;">
+    <span class="concept">Semantic HTML</span>
+    <span class="concept">Relative paths</span>
+    <span class="concept">Meta tags</span>
+    <span class="concept">External resources</span>
+    <span class="concept">DOM tree</span>
+    <span class="concept">Block vs Inline</span>
+  </div>
+
+  <!-- CSS EXPLAINED -->
+  <h2>CSS — Styling</h2>
+  <p style="color:var(--muted);font-size:.9rem;margin-bottom:1rem;">CSS is the <strong style="color:var(--text)">skin</strong> of the website. It controls colors, fonts, layout, spacing, animations, and responsive behaviour.</p>
+
+  <div class="code-block">
+    <span class="cb-label">css/style.css — key concepts</span>
+<span class="comment">/* 1. CSS Custom Properties (variables) */</span>
+<span class="tag">:root</span> {
+  <span class="prop">--accent</span>: <span class="num">#00ff88</span>;   <span class="comment">← define once, use everywhere</span>
+  <span class="prop">--bg</span>:     <span class="num">#0a0a0f</span>;
+  <span class="prop">--text</span>:   <span class="num">#e8e8f0</span>;
+}
+
+<span class="comment">/* 2. Selectors target HTML elements */</span>
+<span class="tag">nav</span> { <span class="prop">position</span>: <span class="val">fixed</span>; }           <span class="comment">← element selector</span>
+<span class="tag">.hero</span> { <span class="prop">display</span>: <span class="val">grid</span>; }          <span class="comment">← class selector</span>
+<span class="tag">#projects</span> { <span class="prop">padding</span>: <span class="num">6rem 4rem</span>; } <span class="comment">← ID selector</span>
+
+<span class="comment">/* 3. Animations with @keyframes */</span>
+<span class="kw">@keyframes</span> <span class="fn">ticker</span> {
+  <span class="kw">from</span> { <span class="prop">transform</span>: <span class="fn">translateX</span>(<span class="num">0</span>); }
+  <span class="kw">to</span>   { <span class="prop">transform</span>: <span class="fn">translateX</span>(<span class="val">-50%</span>); }
+}
+
+<span class="comment">/* 4. Responsive — mobile breakpoints */</span>
+<span class="kw">@media</span> (<span class="prop">max-width</span>: <span class="num">900px</span>) {
+  <span class="tag">.hero</span> { <span class="prop">grid-template-columns</span>: <span class="val">1fr</span>; } <span class="comment">← stack on mobile</span>
+}
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem;">
+    <span class="concept">CSS Variables</span>
+    <span class="concept">Flexbox</span>
+    <span class="concept">CSS Grid</span>
+    <span class="concept">@keyframes</span>
+    <span class="concept">Media Queries</span>
+    <span class="concept">Pseudo-elements</span>
+    <span class="concept">Transitions</span>
+    <span class="concept">clip-path</span>
+  </div>
+
+  <!-- JS EXPLAINED -->
+  <h2>JavaScript — Behaviour</h2>
+  <p style="color:var(--muted);font-size:.9rem;margin-bottom:1rem;">JavaScript is the <strong style="color:var(--text)">brain</strong>. It makes the website interactive — responding to clicks, scroll events, and user input in real time.</p>
+
+  <div class="code-block">
+    <span class="cb-label">js/main.js — key concepts</span>
+<span class="comment">/* 1. Wait for page to load before running */</span>
+<span class="tag">document</span>.<span class="fn">addEventListener</span>(<span class="str">'DOMContentLoaded'</span>, () => {
+
+  <span class="comment">/* 2. Select elements from the DOM (HTML tree) */</span>
+  <span class="kw">const</span> hamburger = <span class="tag">document</span>.<span class="fn">getElementById</span>(<span class="str">'hamburger'</span>);
+  <span class="kw">const</span> navLinks   = <span class="tag">document</span>.<span class="fn">getElementById</span>(<span class="str">'navLinks'</span>);
+
+  <span class="comment">/* 3. Listen for events (click, scroll, mousemove) */</span>
+  hamburger.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, () => {
+    navLinks.<span class="prop">classList</span>.<span class="fn">toggle</span>(<span class="str">'open'</span>); <span class="comment">← add/remove CSS class</span>
+  });
+
+  <span class="comment">/* 4. IntersectionObserver — detect when element enters viewport */</span>
+  <span class="kw">const</span> observer = <span class="kw">new</span> <span class="fn">IntersectionObserver</span>((entries) => {
+    entries.<span class="fn">forEach</span>(entry => {
+      <span class="kw">if</span> (entry.isIntersecting) {
+        entry.target.<span class="prop">classList</span>.<span class="fn">add</span>(<span class="str">'visible'</span>); <span class="comment">← trigger CSS animation</span>
+      }
+    });
+  });
+
+});
+
+<span class="comment">/* 5. Form handler — called from HTML onsubmit attribute */</span>
+<span class="kw">function</span> <span class="fn">handleSubmit</span>(e) {
+  e.<span class="fn">preventDefault</span>();                <span class="comment">← stop default form reload</span>
+  <span class="tag">window</span>.<span class="prop">location</span>.<span class="prop">href</span> = mailtoUrl; <span class="comment">← open email client</span>
+}
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:3rem;">
+    <span class="concept">DOM Manipulation</span>
+    <span class="concept">Event Listeners</span>
+    <span class="concept">classList.toggle</span>
+    <span class="concept">IntersectionObserver</span>
+    <span class="concept">Arrow Functions</span>
+    <span class="concept">Template Literals</span>
+    <span class="concept">encodeURIComponent</span>
+    <span class="concept">DOMContentLoaded</span>
+  </div>
+
+  <div style="background:var(--card);border:1px solid var(--border);padding:2rem;border-top:3px solid var(--accent);">
+    <div style="font-family:'Space Mono',monospace;font-size:.7rem;color:var(--accent);letter-spacing:.15em;margin-bottom:.75rem;">// SUMMARY</div>
+    <p style="color:var(--muted);font-size:.9rem;line-height:1.8;">
+      <strong style="color:var(--text)">HTML</strong> = content &amp; structure &nbsp;|&nbsp;
+      <strong style="color:var(--text)">CSS</strong> = visual design &amp; layout &nbsp;|&nbsp;
+      <strong style="color:var(--text)">JavaScript</strong> = interactivity &amp; behaviour<br><br>
+      All three files are kept <strong style="color:var(--accent)">separate</strong> (separation of concerns) so each does its own job cleanly.
+      Every HTML page links to the same <code style="color:#79b8ff">css/style.css</code> and <code style="color:#f8e3a1">js/main.js</code> —
+      one change in the CSS instantly updates all three pages.
+    </p>
+  </div>
+
+</body>
+</html>

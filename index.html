@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stiv Tech Solutions | Stephen Ikumbu Njenga</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <!-- ════════════════ NAV ════════════════ -->
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">&lt;<span>STIV</span>/&gt;</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ════════════════ HERO ════════════════ -->
+  <section class="hero">
+    <div class="hero-code-bg" aria-hidden="true">
+const stephen = {
+  name: "Stephen Ikumbu Njenga",
+  role: "Software Engineer",
+  stack: ["HTML","CSS","JS","Node.js","MySQL","Python"],
+  university: "Kirinyaga University",
+  brand: "Stiv Tech Solutions",
+  hometown: "Lari, Kenya",
+  status: "open_to_work",
+  passion: () => buildTheFuture(),
+};
+
+function buildTheFuture() {
+  return stephen.stack.map(tech =>
+    new Solution().using(tech).deploy()
+  );
+}
+
+module.exports = stephen;
+    </div>
+
+    <div class="hero-left">
+      <div class="hero-eyebrow">✦ Available for Projects</div>
+      <h1 class="hero-name">
+        <span class="first">Stephen</span>
+        <span class="last">Ikumbu</span>
+      </h1>
+      <div class="hero-brand">// Stiv Tech Solutions</div>
+      <p class="hero-desc">
+        Software Engineering student at <em class="hl">Kirinyaga University</em>,
+        crafting clean code and creative digital solutions.
+        From <em class="hl">Lari, Kenya</em> — building the future, one commit at a time.
+      </p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">View Projects →</a>
+        <a href="contact.html" class="btn-secondary">Get In Touch</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="profile-frame">
+        <img src="WhatsApp Image 2026-03-30 at 10.53.13 AM.jpeg" alt="Stephen Ikumbu Njenga" class="profile-photo"/>
+        <div class="profile-badge">📍 Lari, Kenya</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ TECH TICKER ════════════════ -->
+  <div class="tech-ticker">
+    <div class="ticker-track">
+      <span class="ticker-item"><span class="dot"></span>HTML5</span>
+      <span class="ticker-item"><span class="dot"></span>CSS3</span>
+      <span class="ticker-item"><span class="dot"></span>JavaScript</span>
+      <span class="ticker-item"><span class="dot"></span>Node.js</span>
+      <span class="ticker-item"><span class="dot"></span>MySQL</span>
+      <span class="ticker-item"><span class="dot"></span>Python</span>
+      <span class="ticker-item"><span class="dot"></span>Responsive Design</span>
+      <span class="ticker-item"><span class="dot"></span>REST APIs</span>
+      <span class="ticker-item"><span class="dot"></span>Git &amp; GitHub</span>
+      <span class="ticker-item"><span class="dot"></span>Full-Stack Dev</span>
+      <span class="ticker-item"><span class="dot"></span>HTML5</span>
+      <span class="ticker-item"><span class="dot"></span>CSS3</span>
+      <span class="ticker-item"><span class="dot"></span>JavaScript</span>
+      <span class="ticker-item"><span class="dot"></span>Node.js</span>
+      <span class="ticker-item"><span class="dot"></span>MySQL</span>
+      <span class="ticker-item"><span class="dot"></span>Python</span>
+      <span class="ticker-item"><span class="dot"></span>Responsive Design</span>
+      <span class="ticker-item"><span class="dot"></span>REST APIs</span>
+      <span class="ticker-item"><span class="dot"></span>Git &amp; GitHub</span>
+      <span class="ticker-item"><span class="dot"></span>Full-Stack Dev</span>
+    </div>
+  </div>
+
+  <!-- ════════════════ SKILLS ════════════════ -->
+  <section class="skills-section">
+    <div class="section-label">My Arsenal</div>
+    <h2 class="section-title">Tech Stack &amp; Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon">&lt;/&gt;</div>
+        <div class="skill-name">HTML5 &amp; CSS3</div>
+        <div class="skill-desc">Semantic markup, Flexbox, Grid — crafting pixel-perfect, accessible UI from scratch.</div>
+        <div class="skill-bar-bg"><div class="skill-bar" style="width:90%"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">JS</div>
+        <div class="skill-name">JavaScript</div>
+        <div class="skill-desc">DOM manipulation, async/await, ES6+, and dynamic interactive web experiences.</div>
+        <div class="skill-bar-bg"><div class="skill-bar" style="width:82%"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">⬡</div>
+        <div class="skill-name">Node.js</div>
+        <div class="skill-desc">Server-side JavaScript, RESTful APIs, Express framework, and backend logic.</div>
+        <div class="skill-bar-bg"><div class="skill-bar" style="width:75%"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🗄</div>
+        <div class="skill-name">MySQL</div>
+        <div class="skill-desc">Relational databases, schema design, queries, joins and data management.</div>
+        <div class="skill-bar-bg"><div class="skill-bar" style="width:78%"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">Py</div>
+        <div class="skill-name">Python</div>
+        <div class="skill-desc">Scripting, data processing, automation and general-purpose programming.</div>
+        <div class="skill-bar-bg"><div class="skill-bar" style="width:72%"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">⚡</div>
+        <div class="skill-name">Full-Stack Dev</div>
+        <div class="skill-desc">End-to-end development from wireframes to deployment — frontend meets backend.</div>
+        <div class="skill-bar-bg"><div class="skill-bar" style="width:80%"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ PROJECTS ════════════════ -->
+  <section id="projects" class="projects-section">
+    <div class="section-label">My Work</div>
+    <h2 class="section-title">Featured Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="project-preview">
+          <iframe src="https://stivcoder.github.io/management-school-/" loading="lazy" title="School Management System" scrolling="no"></iframe>
+          <div class="project-preview-overlay"></div>
+          <div class="project-number">#01</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+          </div>
+          <div class="project-title">School Management System</div>
+          <p class="project-desc">A comprehensive web application featuring student records, class schedules, and administrative tools to streamline school operations.</p>
+          <a href="https://stivcoder.github.io/management-school-/" target="_blank" rel="noopener" class="project-link">Live Demo →</a>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-preview">
+          <iframe src="https://stivcoder.github.io/lydian/" loading="lazy" title="Lydian" scrolling="no"></iframe>
+          <div class="project-preview-overlay"></div>
+          <div class="project-number">#02</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+          </div>
+          <div class="project-title">Lydian</div>
+          <p class="project-desc">A modern, stylish web project demonstrating advanced UI design, interactive features and creative frontend development skills in action.</p>
+          <a href="https://stivcoder.github.io/lydian/" target="_blank" rel="noopener" class="project-link">Live Demo →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ STATS ════════════════ -->
+  <div class="stats-bar">
+    <div class="stat-item"><span class="stat-num">2+</span><span class="stat-label">Live Projects</span></div>
+    <div class="stat-item"><span class="stat-num">6</span><span class="stat-label">Technologies</span></div>
+    <div class="stat-item"><span class="stat-num">100%</span><span class="stat-label">Passion Driven</span></div>
+    <div class="stat-item"><span class="stat-num">∞</span><span class="stat-label">Lines of Code</span></div>
+  </div>
+
+  <!-- ════════════════ FOOTER ════════════════ -->
+  <footer>
+    <div class="footer-brand">&lt;STIV/&gt; Tech Solutions</div>
+    <ul class="footer-nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2025 Stephen Ikumbu Njenga. All rights reserved.</div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

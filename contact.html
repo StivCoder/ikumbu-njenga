@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact | Stiv Tech Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">&lt;<span>STIV</span>/&gt;</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-label">// contact.me</div>
+    <h1 class="page-title">Let's <span>Connect</span><br>&amp; Collaborate</h1>
+    <p class="page-sub">Have a project in mind? I'm just a message away. Let's build something great together.</p>
+  </div>
+
+  <div class="contact-layout">
+    <!-- LEFT -->
+    <div class="contact-info reveal">
+      <div class="code-comment">/* reach out anytime */<br><span>contact</span>.init({<br>&nbsp;&nbsp;response_time: "24hrs",<br>&nbsp;&nbsp;coffee_required: true<br>});</div>
+
+      <div class="info-block">
+        <div class="info-label">Direct Contact</div>
+        <div class="info-title">Get In Touch</div>
+        <a href="mailto:ikumbustephen39@gmail.com" class="contact-card">
+          <div class="cc-icon">@</div>
+          <div class="cc-body"><div class="cc-label">Email</div><div class="cc-value">ikumbustephen39@gmail.com</div></div>
+        </a>
+        <a href="tel:+254768539745" class="contact-card">
+          <div class="cc-icon">📞</div>
+          <div class="cc-body"><div class="cc-label">Phone / WhatsApp</div><div class="cc-value">0768 539 745</div></div>
+        </a>
+        <div class="contact-card">
+          <div class="cc-icon">📍</div>
+          <div class="cc-body"><div class="cc-label">Location</div><div class="cc-value">Lari, Kiambu County, Kenya</div></div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon">🎓</div>
+          <div class="cc-body"><div class="cc-label">University</div><div class="cc-value">Kirinyaga University</div></div>
+        </div>
+      </div>
+
+      <div class="availability">
+        <div><span class="avail-dot"></span><span class="avail-status">Available for Work</span></div>
+        <p class="avail-desc">Open to freelance projects, internships, and part-time engagements. Response time within 24 hours.</p>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="contact-form-wrap reveal">
+      <div class="form-header">
+        <div class="form-header-label">// send_message()</div>
+        <h2 class="form-header-title">Send Me a Message</h2>
+      </div>
+
+      <form id="contactForm" onsubmit="handleSubmit(event)">
+        <div class="form-grid">
+          <div class="form-field"><label for="firstName">First Name *</label><input type="text" id="firstName" placeholder="John" required/></div>
+          <div class="form-field"><label for="lastName">Last Name *</label><input type="text" id="lastName" placeholder="Doe" required/></div>
+          <div class="form-field full"><label for="email">Email *</label><input type="email" id="email" placeholder="john@example.com" required/></div>
+          <div class="form-field full"><label for="phone">Phone</label><input type="tel" id="phone" placeholder="+254 7XX XXX XXX"/></div>
+          <div class="form-field full">
+            <label for="subject">Project Type *</label>
+            <select id="subject" required>
+              <option value="" disabled selected>Select project type...</option>
+              <option>Website Development</option>
+              <option>Web Application</option>
+              <option>Backend / API Development</option>
+              <option>Database Design (MySQL)</option>
+              <option>Python Scripting / Automation</option>
+              <option>Other / General Inquiry</option>
+            </select>
+          </div>
+          <div class="form-field full"><label for="message">Message *</label><textarea id="message" placeholder="Tell me about your project..." required></textarea></div>
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn-submit" id="submitBtn"><span>Send Message</span><span>→</span></button>
+          <p class="form-note">* Required. Your info is private — no spam, ever.</p>
+        </div>
+      </form>
+
+      <div class="form-success" id="formSuccess">
+        <div class="success-icon">✅</div>
+        <div class="success-title">Message Sent!</div>
+        <p class="success-msg">Thanks for reaching out! I'll reply within 24 hours.<br>Check out my <a href="index.html#projects">projects</a> in the meantime.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-brand">&lt;STIV/&gt; Tech Solutions</div>
+    <ul class="footer-nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2025 Stephen Ikumbu Njenga. All rights reserved.</div>
+  </footer>
+  <script src="main.js"></script>
+</body>
+</html>
